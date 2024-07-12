@@ -1,24 +1,25 @@
 {
-  "name": "devview",
-  "version": "0.1.0",
-  "private": true,
+  "name": "madcamp_week3",
+  "version": "1.0.0",
+  "description": "This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).",
+  "main": "index.js",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "start": "next start"
   },
+  "author": "",
+  "license": "ISC",
   "dependencies": {
-    "react": "^18",
-    "react-dom": "^18",
-    "next": "14.2.5"
+    "next": "^14.2.5",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-swipeable": "^7.0.1",
+    "swiper": "^11.1.4"
   },
   "devDependencies": {
-    "typescript": "^5",
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "eslint": "^8",
-    "eslint-config-next": "14.2.5"
+    "@types/node": "20.14.10",
+    "@types/react": "18.3.3",
+    "typescript": "5.5.3"
   }
 }

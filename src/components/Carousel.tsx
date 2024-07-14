@@ -11,56 +11,56 @@ import { useState, useEffect } from 'react';
 import InteractiveCard from './InteractiveCard'; // Import your interactive card component
 
 const CarouselContainer = styled.div`
-  width: 80%;
+  width: 90%; /* Adjust the width to make the carousel larger */
   display: flex;
   justify-content: center;
   align-items: center; /* Center align items vertically */
   position: relative;
   max-height: 100vh; /* Ensure container doesn't exceed viewport height */
-  overflow: visible; // Allow overflow
+  overflow: visible; /* Allow overflow */
 `;
 
 const NavigationButtonStyle = css`
   .swiper-button-prev, .swiper-button-next {
     top: 50%;
     transform: translateY(-50%);
-    color: #fff; // Changed for better visibility
-    background: #007BFF; // A blue background for better visibility and aesthetics
+    color: #fff; /* Changed for better visibility */
+    background: #007BFF; /* A blue background for better visibility and aesthetics */
     border-radius: 50%;
-    width: 50px; // Increased size for better touch interaction
-    height: 50px; // Increased size for better touch interaction
+    width: 50px; /* Increased size for better touch interaction */
+    height: 50px; /* Increased size for better touch interaction */
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); // More prominent shadow for 3D effect
-    border: none; // Removing border for a cleaner look
-    cursor: pointer; // Ensures it's clear these are interactive elements
-    transition: background-color 0.3s, transform 0.3s; // Smooth transition for hover and active states
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); /* More prominent shadow for 3D effect */
+    border: none; /* Removing border for a cleaner look */
+    cursor: pointer; /* Ensures it's clear these are interactive elements */
+    transition: background-color 0.3s, transform 0.3s; /* Smooth transition for hover and active states */
   }
 
   .swiper-button-prev:hover, .swiper-button-next:hover,
   .swiper-button-prev:active, .swiper-button-next:active {
-    background-color: #0056b3; // Darker shade on hover and active
-    transform: scale(1.1); // Slightly larger on hover and active for feedback
+    background-color: #0056b3; /* Darker shade on hover and active */
+    transform: scale(1.1); /* Slightly larger on hover and active for feedback */
   }
 
   .swiper-button-prev {
-    left: 20px; // Increased spacing from the edge for better accessibility
+    left: 20px; /* Increased spacing from the edge for better accessibility */
   }
 
   .swiper-button-next {
-    right: 20px; // Increased spacing from the edge for better accessibility
+    right: 20px; /* Increased spacing from the edge for better accessibility */
   }
 
   .swiper-button-prev::after, .swiper-button-next::after {
-    font-size: 20px; // Larger icon size
-    content: attr(data-swiper-button-icon); // Use icons via data attribute
+    font-size: 20px; /* Larger icon size */
+    content: attr(data-swiper-button-icon); /* Use icons via data attribute */
   }
 `;
 
 const SwiperSlideStyled = styled(SwiperSlide)`
-  overflow: visible; // Ensure slides do not clip their contents
-  padding: 0; // Adjust padding if necessary to give more space
+  overflow: visible; /* Ensure slides do not clip their contents */
+  padding: 0; /* Adjust padding if necessary to give more space */
 `;
 
 const Carousel = () => {
@@ -73,7 +73,7 @@ const Carousel = () => {
 
   const updateSpaceBetween = () => {
     const width = window.innerWidth;
-    setSpaceBetween(width/16.18);
+    setSpaceBetween(width / 16.18);
   };
 
   useEffect(() => {
@@ -104,11 +104,21 @@ const Carousel = () => {
     '이국적인 맛'
   ];
 
+  const colors = [
+    '#FFB6C1', // Light Pink
+    '#FA8072', // Salmon
+    '#FFD700', // Gold
+    '#ADFF2F', // Green Yellow
+    '#FF4500', // Orange Red
+    '#1E90FF', // Dodger Blue
+    '#9370DB'  // Medium Purple
+  ];
+
   return (
     <CarouselContainer>
       <Swiper
         modules={[Pagination, Navigation]}
-        slidesPerView={3}
+        slidesPerView={3.2} /* Adjust the slidesPerView */
         centeredSlides={true} /* Center the slides */
         navigation
         pagination={{ clickable: true }}
@@ -137,6 +147,7 @@ const Carousel = () => {
                 title={title}
                 description={descriptions[index]}
                 position={position}
+                color={colors[index]} // Pass the color prop
               />
             </SwiperSlideStyled>
           );

@@ -1,0 +1,22 @@
+/* src/styles/CardDetail.module.css */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bgColor, #7DF9FF); /* Use CSS variable for background color */
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden; /* Ensure no scrolling */
+  }
+  
+  .title {
+    font-size: 36px;
+    color: #333;
+  }
+  
+  .description {
+    font-size: 18px;
+    color: #666;
+  }
+  

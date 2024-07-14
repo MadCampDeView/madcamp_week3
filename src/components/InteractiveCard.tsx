@@ -1,8 +1,9 @@
 // components/InteractiveCard.tsx
-'use client'; // This line indicates that this component should be rendered on the client side
+'use client';
 
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import styled from '@emotion/styled';
+import { useTransition } from './TransitionContext';
 
 interface InteractiveCardProps {
   className?: string;
@@ -14,24 +15,50 @@ interface InteractiveCardProps {
 }
 
 const CardContainer = styled.div<{ position: 'left' | 'right' | 'center'; color?: string }>`
+  perspective: 1000px;
+  margin: 20px auto;
+  width: 420px;  /* Set a fixed width */
+  height: auto;
+  max-width: 100%;  /* Ensure it doesn't exceed the container width */
+  position: relative;
+  aspect-ratio: 1 / 1.618; /* Maintain aspect ratio */
+  @media (max-width: 600px) {
+    width: 250px;  /* Adjust width for smaller screens */
+  }
+  @media (max-width: 400px) {
+    width: 200px;  /* Adjust width for even smaller screens */
+  }
+`;
+
+const CardContent = styled.div<{ isFlipped: boolean }>`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+  transform: ${({ isFlipped }) => (isFlipped ? 'rotateY(180deg)' : 'rotateY(0)')};
+`;
+
+const CardFace = styled.div<{ isBack?: boolean; color?: string }>`
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  aspect-ratio: 1 / 1.618; /* golden ratio */
-  background-color: #7DF9FF;
+  background-color: ${({ color }) => color || '#7DF9FF'};
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;
   text-align: center;
-  transition: transform 0.3s ease, height 0.3s ease, width 0.3s ease;
-  margin: 20px auto;
-  position: relative;
-  transform: ${({ position }) => {
-    if (position === 'center') return 'scale(0.95)';
-    if (position === 'left') return 'scale(0.85) rotateY(-15deg)';
-    if (position === 'right') return 'scale(0.85) rotateY(15deg)';
-  }};
+  color: #333;
+  transform: ${({ isBack }) => (isBack ? 'rotateY(180deg)' : 'rotateY(0)')};
 `;
 
 const Title = styled.h2`
@@ -49,15 +76,26 @@ const Hitbox = styled.div`
   position: absolute;
   justify-content: center;
   align-items: center;
-  top: -10%;
-  left: -10%;
-  width: 120%;
-  height: 120%;
+  top: -20%; /* Increase the hitbox area */
+  left: -20%; /* Increase the hitbox area */
+  width: 140%; /* Increase the hitbox area */
+  height: 140%; /* Increase the hitbox area */
   cursor: pointer;
+  z-index: 1;
 `;
 
 const InteractiveCard: React.FC<InteractiveCardProps> = ({ className, hitboxClass, title, description, position, color }) => {
+  const [isFlipped, setIsFlipped] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
+  const { triggerTransition } = useTransition();
+
+  const handleMouseEnter = () => {
+    setIsFlipped(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsFlipped(false);
+  };
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const card = cardRef.current;
@@ -79,29 +117,58 @@ const InteractiveCard: React.FC<InteractiveCardProps> = ({ className, hitboxClas
     if (position === 'right') card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY+15}deg) scale(0.90)`;
   };
 
-  const handleMouseLeave = () => {
+  const resetTransform = () => {
     const card = cardRef.current;
     if (!card) return;
-    
+
     if (position === 'center') card.style.transform = `perspective(1000px) rotateX(0) rotateY(0) scale(0.95)`;
     if (position === 'left') card.style.transform = `perspective(1000px) rotateX(0) rotateY(-15deg) scale(0.85)`;
     if (position === 'right') card.style.transform = `perspective(1000px) rotateX(0) rotateY(15deg) scale(0.85)`;
   };
 
   useEffect(() => {
-    const card = cardRef.current;
-    if (card) {
-      if (position === 'center') card.style.transform = `perspective(1000px) rotateX(0) rotateY(0) scale(0.95)`;
-      if (position === 'left') card.style.transform = `perspective(1000px) rotateX(0) rotateY(-15deg) scale(0.85)`;
-      if (position === 'right') card.style.transform = `perspective(1000px) rotateX(0) rotateY(15deg) scale(0.85)`;
-    }
+    resetTransform();
   }, [position]);
 
+  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.preventDefault();
+
+    const card = cardRef.current;
+    if (!card) return;
+
+    const cardRect = card.getBoundingClientRect();
+
+    const clickX = e.clientX;
+    const clickY = e.clientY;
+
+    // Check if the click is within the card bounds
+    if (clickX >= cardRect.left && clickX <= cardRect.right && clickY >= cardRect.top && clickY <= cardRect.bottom) {
+      const { clientX, clientY } = e;
+      // Include color in the URL query
+      triggerTransition(color || '#7DF9FF', clientX, clientY, `/card-details/${title}?color=${encodeURIComponent(color || '#7DF9FF')}`);
+    }
+  };
+
   return (
-    <CardContainer className={className} ref={cardRef} position={position} color={color}>
-      <Title>{title}</Title>
-      <Description>{description}</Description>
-      <Hitbox className={hitboxClass} onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave} />
+    <CardContainer
+      className={className}
+      ref={cardRef}
+      position={position}
+      color={color}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      onClick={handleClick}
+    >
+      <CardContent isFlipped={isFlipped}>
+        <CardFace color={color}>
+          <Title>{title}</Title>
+          <Description>{description}</Description>
+        </CardFace>
+        <CardFace isBack color={color}> {/* Use the color prop here as well */}
+          <p>Additional content on the back.</p>
+        </CardFace>
+      </CardContent>
+      <Hitbox className={hitboxClass} onMouseMove={handleMouseMove} onMouseLeave={resetTransform} />
     </CardContainer>
   );
 };

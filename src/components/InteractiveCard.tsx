@@ -173,4 +173,5 @@ const InteractiveCard: React.FC<InteractiveCardProps> = ({ className, hitboxClas
   );
 };
 
+
 export default InteractiveCard;

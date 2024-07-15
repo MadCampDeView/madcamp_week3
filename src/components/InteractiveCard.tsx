@@ -17,9 +17,9 @@ interface InteractiveCardProps {
 const CardContainer = styled.div<{ position: 'left' | 'right' | 'center'; color?: string }>`
   perspective: 1000px;
   margin: 20px auto;
-  width: 420px;  /* Set a fixed width */
+  width: 500px;  /* Set a fixed width */
   height: auto;
-  max-width: 100%;  /* Ensure it doesn't exceed the container width */
+  max-width: 85%;  /* Ensure it doesn't exceed the container width */
   position: relative;
   aspect-ratio: 1 / 1.618; /* Maintain aspect ratio */
   @media (max-width: 600px) {
@@ -144,8 +144,8 @@ const InteractiveCard: React.FC<InteractiveCardProps> = ({ className, hitboxClas
     // Check if the click is within the card bounds
     if (clickX >= cardRect.left && clickX <= cardRect.right && clickY >= cardRect.top && clickY <= cardRect.bottom) {
       const { clientX, clientY } = e;
-      // Include color in the URL query
-      triggerTransition(color || '#7DF9FF', clientX, clientY, `/card-details/${title}?color=${encodeURIComponent(color || '#7DF9FF')}`);
+      // Update the URL to point to the new location
+      triggerTransition(color || '#7DF9FF', clientX, clientY, `/card-details?name=${encodeURIComponent(title)}`);
     }
   };
 

@@ -1,22 +1,86 @@
-/* src/styles/CardDetail.module.css */
+/* CardDetail.module.css */
 .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--bgColor, #7DF9FF); /* Use CSS variable for background color */
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden; /* Ensure no scrolling */
-  }
-  
-  .title {
-    font-size: 36px;
-    color: #333;
-  }
-  
-  .description {
-    font-size: 18px;
-    color: #666;
-  }
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5vh;
+  height: 100vh;
+  background-color: #000000;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.imageContentWrapper {
+  display: flex;
+  justify-content: flex-start;
+  align-items: stretch;
+  padding: 1.618vh;
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.imageContainer {
+  width: 38.2%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.image {
+  max-width: 100%;
+  max-height: 100%;
+  padding: 10%;
+  object-fit: contain;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 61.8%;
+  padding: 2vh;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.titleWrapper {
+  display: flex;
+  justify-content: flex-start;
+  margin-right: 3.236vw;
+  margin-bottom: 1.618vh;
+  height: 38.2%;
+  border: 1px solid blue;
+  border-radius: 5px;
+  box-sizing: border-box;
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out, background-color 0.2s ease-in-out, border-color 0.3s ease-in-out;
+}
+
+.titleWrapper:hover {
+  transform: scale(1.01);
+  background-color: #590cff;
+}
+
+.titleWrapper:hover .title {
+  color: #ffffff;
+}
+
+.title {
+  font-size: 4vw;
+  color: blue;
+  margin: 0;
+  padding: 10px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  overflow: hidden;
+  transition: color 0.3s ease-in-out;
+}
+

@@ -1,18 +1,17 @@
-// components/SpreadEffect.tsx
 'use client';
 
 import React, { useEffect } from 'react';
 import styled from '@emotion/styled';
 
-const SpreadEffectContainer = styled.div<{ color: string; x: number; y: number }>`
+const SpreadEffectContainer = styled.div<{ color: string; x: number; y: number; delay: string }>`
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
   background-color: ${({ color }) => color};
-  z-index: 1000;
-  animation: spreadEffect 1s forwards; /* Set the animation duration here */
+  z-index: ${({ color }) => (color === 'black' ? 1000 : 999)};
+  animation: spreadEffect 0.75s forwards ${({ delay }) => delay};
   clip-path: circle(0% at ${({ x, y }) => `${x}px ${y}px`});
 
   @keyframes spreadEffect {
@@ -34,11 +33,16 @@ interface SpreadEffectProps {
 
 const SpreadEffect: React.FC<SpreadEffectProps> = ({ color, x, y, onAnimationEnd }) => {
   useEffect(() => {
-    const timer = setTimeout(onAnimationEnd, 500); // Trigger 100ms before the animation ends
+    const timer = setTimeout(onAnimationEnd, 800); // Trigger after both animations
     return () => clearTimeout(timer);
   }, [onAnimationEnd]);
 
-  return <SpreadEffectContainer color={color} x={x} y={y} />;
+  return (
+    <>
+      <SpreadEffectContainer color={color} x={x} y={y} delay="0s" />
+      <SpreadEffectContainer color="black" x={x} y={y} delay="0.25s" />
+    </>
+  );
 };
 
 export default SpreadEffect;

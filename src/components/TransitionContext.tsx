@@ -28,6 +28,16 @@ export const TransitionProvider = ({ children }: { children: ReactNode }) => {
     setTargetUrl(url);
   }, []);
 
+  const handleAnimationEnd = () => {
+    if (targetUrl) {
+      router.push(targetUrl);
+      setTargetUrl(null);
+    }
+    setTimeout(() => {
+      setSpreadParams(null);
+    }, 100); // Slight delay to ensure navigation starts before removing the effect
+  };
+
   return (
     <TransitionContext.Provider value={{ triggerTransition }}>
       {children}
@@ -36,14 +46,7 @@ export const TransitionProvider = ({ children }: { children: ReactNode }) => {
           color={spreadParams.color}
           x={spreadParams.x}
           y={spreadParams.y}
-          onAnimationEnd={() => {
-            if (targetUrl) {
-              router.push(targetUrl);
-            }
-            setTimeout(() => {
-                setSpreadParams(null);
-              }, 100);
-          }}
+          onAnimationEnd={handleAnimationEnd}
         />
       )}
     </TransitionContext.Provider>

@@ -1,4 +1,3 @@
-// components/InteractiveCard.tsx
 'use client';
 
 import React, { useRef, useEffect, useState } from 'react';
@@ -22,6 +21,7 @@ const CardContainer = styled.div<{ position: 'left' | 'right' | 'center'; color?
   max-width: 85%;  /* Ensure it doesn't exceed the container width */
   position: relative;
   aspect-ratio: 1 / 1.618; /* Maintain aspect ratio */
+  overflow: visible; /* Allow hitbox to overflow */
   @media (max-width: 600px) {
     width: 250px;  /* Adjust width for smaller screens */
   }
@@ -57,8 +57,22 @@ const CardFace = styled.div<{ isBack?: boolean; color?: string }>`
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;
   text-align: center;
+  overflow: hidden;
   color: #333;
   transform: ${({ isBack }) => (isBack ? 'rotateY(180deg)' : 'rotateY(0)')};
+  &::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(white, rgba(255, 255, 255, 0) 50%, white);
+    transform: rotate(30deg);
+    transition: opacity 0.3s, transform 0.3s;
+    opacity: 0;
+    pointer-events: none;
+  }
 `;
 
 const Title = styled.h2`
@@ -74,27 +88,59 @@ const Description = styled.p`
 
 const Hitbox = styled.div`
   position: absolute;
-  justify-content: center;
-  align-items: center;
-  top: -20%; /* Increase the hitbox area */
-  left: -20%; /* Increase the hitbox area */
-  width: 140%; /* Increase the hitbox area */
-  height: 140%; /* Increase the hitbox area */
+  top: -10%; /* Increase the hitbox area */
+  left: -10%; /* Increase the hitbox area */
+  width: 120%; /* Increase the hitbox area */
+  height: 120%; /* Increase the hitbox area */
   cursor: pointer;
   z-index: 1;
 `;
 
+const LightEffect = styled.div<{ x: number; y: number; isVisible: boolean }>`
+  position: absolute;
+  top: ${({ y }) => y}px;
+  left: ${({ x }) => x}px;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 50%);
+  border-radius: 50%;
+  pointer-events: none;
+  transition: opacity 0.5s, transform 0.5s;
+  opacity: ${({ isVisible }) => (isVisible ? 1 : 0)};
+  transform: translate(-50%, -50%);
+  z-index: 0;
+`;
+
+const ShineContainer = styled.div<{ x: number; y: number }>`
+  width: 1000px;
+  height: 200px;
+  position: absolute;
+  top: ${({ y }) => y-100}px;
+  left: ${({ x }) => x-500}px;
+  // background: linear-gradient(top, transparent, rgba(200,200,200,1));
+  background: linear-gradient(0, rgba(255,255,255,0) 0%, rgba(255,255,255,0.1) 30%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0.15) 80%, rgba(255,255,255,0) 100%);
+  transform: rotate(-35deg);
+  pointer-events: none;
+  opacity: 1;
+  transition: transform 0.5s;
+`;
+
 const InteractiveCard: React.FC<InteractiveCardProps> = ({ className, hitboxClass, title, description, position, color }) => {
   const [isFlipped, setIsFlipped] = useState(false);
+  const [lightPosition, setLightPosition] = useState({ x: 0, y: 0 });
+  const [isLightVisible, setIsLightVisible] = useState(false);
+  const [shinePosition, setShinePosition] = useState({ avgX: 0, avgY: 0 });
   const cardRef = useRef<HTMLDivElement>(null);
   const { triggerTransition } = useTransition();
 
   const handleMouseEnter = () => {
     setIsFlipped(true);
+    setIsLightVisible(true);
   };
 
   const handleMouseLeave = () => {
     setIsFlipped(false);
+    setIsLightVisible(false);
   };
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -106,15 +152,26 @@ const InteractiveCard: React.FC<InteractiveCardProps> = ({ className, hitboxClas
     const x = e.clientX - cardRect.left; // x position within the element.
     const y = e.clientY - cardRect.top;  // y position within the element.
 
+    setLightPosition({ x, y });
+
     const centerX = cardRect.width / 2;
     const centerY = cardRect.height / 2;
 
-    const rotateY = Math.sin(((centerX - x) / centerX) * (Math.PI / 2)) * 7.5; // max rotation is 10 degrees
-    const rotateX = Math.sin(((y - centerY) / centerY) * (Math.PI / 2)) * 7.5; // max rotation is 10 degrees
+    const deltaX = (centerX - x) / centerX;
+    const deltaY = (y - centerY) / centerY;
+
+    const rotateY = Math.sin(deltaX * (Math.PI / 2)) * 7.5; // max rotation is 10 degrees
+    const rotateX = Math.sin(deltaY * (Math.PI / 2)) * 7.5; // max rotation is 10 degrees
 
     if (position === 'center') card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.00)`;
-    if (position === 'left') card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY-15}deg) scale(0.90)`;
-    if (position === 'right') card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY+15}deg) scale(0.90)`;
+    if (position === 'left') card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY - 15}deg) scale(0.90)`;
+    if (position === 'right') card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY + 15}deg) scale(0.90)`;
+
+    const avgX = (centerX + x) / 2;
+    const avgY = (centerY + y) / 2;
+    // const avgX = x;
+    // const avgY = y;
+    setShinePosition({avgX, avgY});
   };
 
   const resetTransform = () => {
@@ -164,14 +221,15 @@ const InteractiveCard: React.FC<InteractiveCardProps> = ({ className, hitboxClas
           <Title>{title}</Title>
           <Description>{description}</Description>
         </CardFace>
-        <CardFace isBack color={color}> {/* Use the color prop here as well */}
+        <CardFace isBack color={color}>
+          <LightEffect x={lightPosition.x} y={lightPosition.y} isVisible={isLightVisible} />
           <p>Additional content on the back.</p>
+          <ShineContainer x={shinePosition.avgX} y={shinePosition.avgY}/>
         </CardFace>
       </CardContent>
       <Hitbox className={hitboxClass} onMouseMove={handleMouseMove} onMouseLeave={resetTransform} />
     </CardContainer>
   );
 };
-
 
 export default InteractiveCard;

@@ -82,24 +82,31 @@ const CocktailFamily = styled.p`
 `;
 
 const Description = styled.p`
+  width: 75%;
   font-size: 16px;
   margin-bottom: 10px;
+  line-height: 1.5;
 `;
 
 const IngredientsList = styled.ul`
   list-style-type: none;
   padding: 0;
   font-size: 16px;
-  margin-top: 10px;
+  margin-top: 50px;
+  width: 75%;
   margin-bottom: 10px;
-  max-height: 150px;
   overflow-y: auto;
   text-align: left;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
 `;
 
 const Ingredient = styled.li`
   margin: 5px 0;
   line-height: 1.5;
+  padding: 5px;
+  border-bottom: 1px solid #ddd;
 `;
 
 

@@ -54,13 +54,9 @@ const Glass: React.FC<GlassProps> = ({ modelPath, isHovered, setIsHovered }) => 
   });
 
   const introProps = useSpring({
-    from: { opacity: 0, scale: 0.8 },
-    to: async (next) => {
-      await next({ opacity: 1, scale: 1.05 });
-      await next({ scale: 0.95 });
-      await next({ scale: 1 });
-    },
-    config: { duration: 600, easing: (t) => t * (2 - t) }, // cubic-bezier(0.4, 0, 0.2, 1) approximation
+    from: { opacity: 0, scale: 0.2 },
+    to: { opacity: 1, scale: 0.8 },
+    config: { duration: 750, easing: (t) => t * (2 - t) }, // cubic-bezier(0.4, 0, 0.2, 1) approximation
   });
 
   const props = useSpring({
@@ -74,11 +70,11 @@ const Glass: React.FC<GlassProps> = ({ modelPath, isHovered, setIsHovered }) => 
       ref={glassRef}
       object={scene}
       position={props.position}
-      scale={props.scale}
+      scale={introProps.scale} // Use introProps scale for intro animation
       rotation={[0.1, 0, 0.1]} // Tilt the glass a bit
       onPointerOver={() => setIsHovered(true)}
       onPointerOut={() => setIsHovered(false)}
-      style={introProps}
+      style={introProps} // Apply introProps for intro animation
     />
   );
 };

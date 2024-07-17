@@ -1,0 +1,391 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Bodoni+Moda+SC:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap');
+
+@font-face {
+  font-family: 'GasoekOne-Regular';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_JAMO@1.0/GasoekOne-Regular.woff2')
+    format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.outerContainer {
+    margin: 0;
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    /* top: 100vh; */
+    transition: top 0.5s ease;
+  }
+  
+  .scrollContainer {
+    display: flex;
+    align-items: center;
+    height: 100vh;
+    overflow-x: auto;
+    overflow-y: hidden;
+    flex: 1;
+    position: relative;
+    z-index: 2;
+  }
+  
+  .pageContent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    position: relative;
+  }
+  
+  .textContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    text-align: left;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: left 0.5s ease;
+  }
+  
+  .outerContainer.show .textContainer {
+    left: 0;
+    opacity: 1;
+  }
+  
+  .topBox,
+  .bottomBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #c8acd6;
+    color: black;
+    width: 700px;
+    height: 450px;
+    text-align: center;
+    box-sizing: border-box;
+    padding: 20px;
+  }
+  
+  .bottomBox {
+    background-color: #433d8b;
+  }
+  
+  .bebasNeauRegular {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px;
+  }
+  
+  .redHatDisplayFont {
+    font-family: 'Red Hat Display', sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 800;
+    font-style: normal;
+    font-size: 36px;
+  }
+  
+  .container {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    white-space: nowrap;
+    flex: 1;
+    margin-left: 700px;
+    z-index: 1;
+  }
+  
+  .page {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width: 100vw;
+    height: 100%;
+    transition: transform 0.5s ease;
+    position: relative;
+  }
+  
+  .dummyContainer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 40%;
+    text-align: center;
+    margin-right: 100px;
+  }
+  
+  .dummyContainer img {
+    max-width: 100vw;
+    height: 600px;
+    border-radius: 10px;
+    -webkit-animation: scale-in-center 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+      both;
+    animation: scale-in-center 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  }
+  
+  .page1 {
+    background-color: black;
+  }
+  
+  .page2 {
+    background-color: black;
+  }
+  
+  .page3 {
+    background-color: #3cb371;
+  }
+  
+  .page4 {
+    background-color: #ff6347;
+  }
+  
+  .listWrapper {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    max-width: 1000px;
+    margin-bottom: 50px;
+    box-sizing: border-box;
+  }
+  
+  .list {
+    margin: 10px;
+    text-align: center;
+    flex: 1;
+    position: relative;
+    transition: flex 0.3s ease-in-out, width 0.3s ease-in-out;
+    height: 400px;
+    min-width: 10px;
+  }
+  
+  .card {
+    perspective: 1000px;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .cardInner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 1s;
+  }
+  
+  .cardFace {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+  }
+  
+  .front {
+    transform: rotateY(0deg);
+  }
+  
+  .back {
+    transform: rotateY(180deg);
+  }
+  
+  .list:hover .cardInner {
+    transform: rotateY(180deg);
+    box-shadow: 0 0 40px var(--hover-glow-color), 0 0 80px var(--hover-glow-color),
+      0 0 120px var(--hover-glow-color);
+  }
+  
+  .list:hover {
+    flex: 8;
+  }
+  
+  .rectangle {
+    width: 80%;
+    height: 100%;
+    background: var(--rectangle-gradient);
+    display: block;
+    transition: width 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .list:hover .rectangle {
+    width: 100%;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  }
+  
+  .rectangle::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 200%;
+    height: 100%;
+    background: url('/images/noise.png'),
+      linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.4) 50%,
+        rgba(255, 255, 255, 0) 100%
+      );
+    background-blend-mode: overlay;
+    transition: left 0.5s;
+    opacity: 0.5;
+  }
+  
+  .list:hover .rectangle::before {
+    left: 100%;
+    transition: left 0.5s;
+    opacity: 1;
+  }
+  
+  .rectangle::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.2;
+    pointer-events: none;
+  }
+  
+  .cocktailImage {
+    width: 100%;
+    height: 100%;
+    display: block;
+    border-radius: 10px;
+  }
+  
+  /* 페이지별 배경색에 따른 그라데이션 및 호버 색상 */
+  .page1 .rectangle {
+    background: linear-gradient(135deg, #8b4513, #deb887);
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .page1 .rectangle:hover {
+    box-shadow: 0 0 15px rgba(139, 69, 19, 1);
+  }
+  
+  .page2 .rectangle {
+    background: linear-gradient(135deg, #3cb371, #98fb98);
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .page2 .rectangle:hover {
+    box-shadow: 0 0 15px rgba(60, 179, 113, 1);
+  }
+  
+  .page3 .rectangle {
+    background: linear-gradient(135deg, #4682b4, #87cefa);
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .page3 .rectangle:hover {
+    box-shadow: 0 0 15px rgba(70, 130, 180, 1);
+  }
+  
+  .page4 .rectangle {
+    background: linear-gradient(135deg, #696969, #a9a9a9);
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .page4 .rectangle:hover {
+    box-shadow: 0 0 15px rgba(105, 105, 105, 1);
+  }
+  
+  
+  /* 추가 애니메이션 */
+  @keyframes shine {
+    0% {
+      background-position: -100%;
+    }
+    100% {
+      background-position: 100%;
+    }
+  }
+  
+  /* 노이즈 효과 */
+  .rectangle::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 200%;
+    height: 100%;
+    background: url('/images/noise.png'),
+      linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.4) 50%,
+        rgba(255, 255, 255, 0) 100%
+      );
+    background-blend-mode: overlay;
+    transition: 0.5s;
+  }
+  
+  .list:hover .rectangle::before {
+    left: 100%;
+    transition: left 0.5s;
+    opacity: 1;
+  }
+  
+  @keyframes verticalScrollContinuous {
+    0% {
+      transform: translateY(100%);
+    }
+    100% {
+      transform: translateY(-100%);
+    }
+  }
+  
+  .verticalTextContainer {
+    position: absolute;
+    left: 100px;
+    top: 0;
+    width: 100px;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+  }
+  
+  .verticalTextContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    animation: verticalScrollContinuous 9s linear infinite;
+  }
+  
+  .verticalText {
+    font-size: 100px;
+    font-family: 'GasoekOne-Regular', sans-serif;
+    font-weight: 800;
+    writing-mode: vertical-rl;
+    text-align: center;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.5);
+  }
+  
+  .scale_in_center {
+    animation: scale-in-center 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  }
+  
+  @keyframes scale-in-center {
+    0% {
+      transform: scale(0);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }

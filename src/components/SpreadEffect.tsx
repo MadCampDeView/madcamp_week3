@@ -40,7 +40,7 @@ const SpreadEffect: React.FC<SpreadEffectProps> = ({ color, x, y, onAnimationEnd
   return (
     <>
       <SpreadEffectContainer color={color} x={x} y={y} delay="0s" />
-      <SpreadEffectContainer color="black" x={x} y={y} delay="0.3s" />
+      <SpreadEffectContainer color="#212529" x={x} y={y} delay="0.3s" />
     </>
   );
 };

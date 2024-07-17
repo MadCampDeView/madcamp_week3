@@ -18,7 +18,7 @@ const CardContainer = styled.div<{ position: 'left' | 'right' | 'center'; color?
   margin: 20px auto;
   width: 500px;  /* Set a fixed width */
   height: auto;
-  max-width: 85%;  /* Ensure it doesn't exceed the container width */
+  max-width: 95%;  /* Ensure it doesn't exceed the container width */
   position: relative;
   aspect-ratio: 1 / 1.618; /* Maintain aspect ratio */
   overflow: visible; /* Allow hitbox to overflow */
@@ -34,8 +34,6 @@ const CardContent = styled.div<{ isFlipped: boolean }>`
   width: 100%;
   height: 100%;
   position: absolute;
-  top: 0;
-  left: 0;
   transition: transform 0.8s;
   transform-style: preserve-3d;
   transform: ${({ isFlipped }) => (isFlipped ? 'rotateY(180deg)' : 'rotateY(0)')};
@@ -55,24 +53,11 @@ const CardFace = styled.div<{ isBack?: boolean; color?: string }>`
   background-color: ${({ color }) => color || '#7DF9FF'};
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 20px;
+  // padding: 20px;
   text-align: center;
   overflow: hidden;
   color: #333;
   transform: ${({ isBack }) => (isBack ? 'rotateY(180deg)' : 'rotateY(0)')};
-  &::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(white, rgba(255, 255, 255, 0) 50%, white);
-    transform: rotate(30deg);
-    transition: opacity 0.3s, transform 0.3s;
-    opacity: 0;
-    pointer-events: none;
-  }
 `;
 
 const Title = styled.h2`
@@ -88,13 +73,16 @@ const Description = styled.p`
 
 const Hitbox = styled.div`
   position: absolute;
-  top: -10%; /* Increase the hitbox area */
-  left: -10%; /* Increase the hitbox area */
-  width: 120%; /* Increase the hitbox area */
-  height: 120%; /* Increase the hitbox area */
+  justify-content: center;
+  align-items: center;
+  top: -20%; /* Increase the hitbox area */
+  left: -20%; /* Increase the hitbox area */
+  width: 140%; /* Increase the hitbox area */
+  height: 140%; /* Increase the hitbox area */
   cursor: pointer;
   z-index: 1;
 `;
+
 
 const LightEffect = styled.div<{ x: number; y: number; isVisible: boolean }>`
   position: absolute;

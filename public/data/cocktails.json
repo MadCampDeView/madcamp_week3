@@ -1,0 +1,374 @@
+[
+    {
+      "category": "Classic Cocktails",
+      "cocktails": [
+        {
+          "name": "Martini",
+          "description": "A classic cocktail made with gin and dry vermouth.",
+          "recipe": {
+            "ingredients": ["2 oz gin", "0.5 oz dry vermouth", "Olive or lemon twist for garnish"],
+            "steps": [
+              "Add gin and vermouth to a mixing glass filled with ice.",
+              "Stir well and strain into a chilled martini glass.",
+              "Garnish with an olive or lemon twist."
+            ]
+          },
+          "color": "#C9D1D3",
+          "recommended": false,
+          "glass_path": "/glass3.glb"
+        },
+        {
+          "name": "Margarita",
+          "description": "A refreshing cocktail made with tequila, lime juice, and triple sec.",
+          "recipe": {
+            "ingredients": ["2 oz tequila", "1 oz lime juice", "1 oz triple sec", "Lime wheel or salt rim for garnish"],
+            "steps": [
+              "Add tequila, lime juice, and triple sec to a shaker filled with ice.",
+              "Shake well and strain into a glass with a salted rim.",
+              "Garnish with a lime wheel."
+            ]
+          },
+          "color": "#DFFF00",
+          "recommended": true,
+          "glass_path": "/glass4.glb"
+        },
+        {
+          "name": "Mojito",
+          "description": "A fresh cocktail made with rum, lime, mint, sugar, and soda water.",
+          "recipe": {
+            "ingredients": ["2 oz white rum", "1 oz lime juice", "2 tsp sugar", "Mint leaves", "Soda water", "Lime wedge and mint sprig for garnish"],
+            "steps": [
+              "Muddle mint leaves and sugar in a glass.",
+              "Add lime juice and rum, then fill the glass with ice.",
+              "Top with soda water and stir gently.",
+              "Garnish with a lime wedge and mint sprig."
+            ]
+          },
+          "color": "#98FB98",
+          "recommended": false,
+          "glass_path": "/glass1.glb"
+        },
+        {
+          "name": "Daiquiri",
+          "description": "A simple and delicious cocktail made with rum, lime juice, and sugar.",
+          "recipe": {
+            "ingredients": ["2 oz white rum", "1 oz lime juice", "0.75 oz simple syrup", "Lime twist for garnish"],
+            "steps": [
+              "Add rum, lime juice, and simple syrup to a shaker filled with ice.",
+              "Shake well and strain into a chilled glass.",
+              "Garnish with a lime twist."
+            ]
+          },
+          "color": "#FFD700",
+          "recommended": false,
+          "glass_path": "/glass4.glb"
+        },
+        {
+          "name": "Old Fashioned",
+          "description": "A traditional cocktail made with bourbon or rye whiskey, sugar, and bitters.",
+          "recipe": {
+            "ingredients": ["2 oz bourbon or rye whiskey", "1 sugar cube", "2-3 dashes Angostura bitters", "Orange peel for garnish"],
+            "steps": [
+              "Muddle the sugar cube and bitters in a glass.",
+              "Add ice and whiskey, then stir gently.",
+              "Garnish with an orange peel."
+            ]
+          },
+          "color": "#A0522D",
+          "recommended": true,
+          "glass_path": "/glass6.glb"
+        },
+        {
+          "name": "Negroni",
+          "description": "A bold and bitter cocktail made with gin, Campari, and sweet vermouth.",
+          "recipe": {
+            "ingredients": ["1 oz gin", "1 oz Campari", "1 oz sweet vermouth", "Orange twist for garnish"],
+            "steps": [
+              "Add gin, Campari, and sweet vermouth to a mixing glass filled with ice.",
+              "Stir well and strain into a chilled glass.",
+              "Garnish with an orange twist."
+            ]
+          },
+          "color": "#D10000",
+          "recommended": true,
+          "glass_path": "/glass4.glb"
+        }
+      ]
+    },
+    {
+      "category": "Tropical Cocktails",
+      "cocktails": [
+        {
+          "name": "Piña Colada",
+          "description": "A tropical cocktail made with rum, coconut cream, and pineapple juice.",
+          "recipe": {
+            "ingredients": ["2 oz white rum", "1 oz coconut cream", "3 oz pineapple juice", "Pineapple slice and cherry for garnish"],
+            "steps": [
+              "Add rum, coconut cream, and pineapple juice to a blender with ice.",
+              "Blend until smooth and pour into a chilled glass.",
+              "Garnish with a pineapple slice and cherry."
+            ]
+          },
+          "color": "#FFFDD0",
+          "recommended": true,
+          "glass_path": "/glass3.glb"
+        },
+        {
+          "name": "Mai Tai",
+          "description": "A rich cocktail made with rum, orange curaçao, lime juice, and orgeat syrup.",
+          "recipe": {
+            "ingredients": ["1 oz white rum", "1 oz dark rum", "0.5 oz orange curaçao", "0.5 oz lime juice", "0.5 oz orgeat syrup", "Lime wheel and mint sprig for garnish"],
+            "steps": [
+              "Add all ingredients to a shaker filled with ice.",
+              "Shake well and strain into a glass filled with ice.",
+              "Garnish with a lime wheel and mint sprig."
+            ]
+          },
+          "color": "#FFA500",
+          "recommended": false,
+          "glass_path": "/glass5.glb"
+        },
+        {
+          "name": "Tequila Sunrise",
+          "description": "A visually stunning cocktail made with tequila, orange juice, and grenadine.",
+          "recipe": {
+            "ingredients": ["2 oz tequila", "4 oz orange juice", "0.5 oz grenadine", "Orange slice and cherry for garnish"],
+            "steps": [
+              "Add tequila and orange juice to a glass filled with ice.",
+              "Slowly pour grenadine over the back of a spoon to create a sunrise effect.",
+              "Garnish with an orange slice and cherry."
+            ]
+          },
+          "color": "#FF6347",
+          "recommended": false,
+          "glass_path": "/glass3.glb"
+        },
+        {
+          "name": "Blue Hawaiian",
+          "description": "A cool and refreshing cocktail made with rum, blue curaçao, coconut cream, and pineapple juice.",
+          "recipe": {
+            "ingredients": ["1 oz light rum", "1 oz blue curaçao", "1 oz coconut cream", "2 oz pineapple juice", "Pineapple slice and cherry for garnish"],
+            "steps": [
+              "Add all ingredients to a shaker filled with ice.",
+              "Shake well and strain into a glass filled with ice.",
+              "Garnish with a pineapple slice and cherry."
+            ]
+          },
+          "color": "#00BFFF",
+          "recommended": false,
+          "glass_path": "/glass4.glb"
+        },
+        {
+          "name": "Singapore Sling",
+          "description": "A colorful cocktail made with gin, cherry heering, grenadine, pineapple juice, and lime juice.",
+          "recipe": {
+            "ingredients": ["1.5 oz gin", "0.5 oz cherry heering", "0.25 oz grenadine", "4 oz pineapple juice", "0.5 oz lime juice", "Pineapple slice and cherry for garnish"],
+            "steps": [
+              "Add all ingredients to a shaker filled with ice.",
+              "Shake well and strain into a glass filled with ice.",
+              "Garnish with a pineapple slice and cherry."
+            ]
+          },
+          "color": "#FF69B4",
+          "recommended": false,
+          "glass_path": "/glass3.glb"
+        },
+        {
+          "name": "Dark 'n' Stormy",
+          "description": "A strong cocktail made with dark rum and ginger beer.",
+          "recipe": {
+            "ingredients": ["2 oz dark rum", "3 oz ginger beer", "Lime wedge for garnish"],
+            "steps": [
+              "Fill a glass with ice and add ginger beer.",
+              "Slowly pour dark rum over the back of a spoon to float it on top.",
+              "Garnish with a lime wedge."
+            ]
+          },
+          "color": "#8B4513",
+          "recommended": false,
+          "glass_path": "/glass5.glb"
+        }
+      ]
+    },
+    {
+      "category": "Modern Cocktails",
+      "cocktails": [
+        {
+          "name": "Espresso Martini",
+          "description": "A coffee-flavored cocktail made with vodka, coffee liqueur, and espresso.",
+          "recipe": {
+            "ingredients": ["2 oz vodka", "0.5 oz coffee liqueur", "1 oz freshly brewed espresso", "Coffee beans for garnish"],
+            "steps": [
+              "Add vodka, coffee liqueur, and espresso to a shaker filled with ice.",
+              "Shake well and strain into a chilled martini glass.",
+              "Garnish with a few coffee beans."
+            ]
+          },
+          "color": "#3B2F2F",
+          "recommended": true,
+          "glass_path": "/glass2.glb"
+        },
+        {
+          "name": "Cosmopolitan",
+          "description": "A sophisticated cocktail made with vodka, triple sec, cranberry juice, and lime juice.",
+          "recipe": {
+            "ingredients": ["1.5 oz vodka", "1 oz triple sec", "0.5 oz cranberry juice", "0.5 oz lime juice", "Lime twist for garnish"],
+            "steps": [
+              "Add all ingredients to a shaker filled with ice.",
+              "Shake well and strain into a chilled martini glass.",
+              "Garnish with a lime twist."
+            ]
+          },
+          "color": "#FF1493",
+          "recommended": false,
+          "glass_path": "/glass3.glb"
+        },
+        {
+          "name": "Apple Martini",
+          "description": "A tangy cocktail made with vodka, apple schnapps, and lime juice.",
+          "recipe": {
+            "ingredients": ["2 oz vodka", "1 oz apple schnapps", "0.5 oz lime juice", "Apple slice for garnish"],
+            "steps": [
+              "Add all ingredients to a shaker filled with ice.",
+              "Shake well and strain into a chilled martini glass.",
+              "Garnish with an apple slice."
+            ]
+          },
+          "color": "#7FFF00",
+          "recommended": false,
+          "glass_path": "/glass3.glb"
+        },
+        {
+          "name": "Raspberry Mojito",
+          "description": "A twist on the classic mojito with raspberries.",
+          "recipe": {
+            "ingredients": ["2 oz white rum", "1 oz lime juice", "2 tsp sugar", "Fresh raspberries", "Mint leaves", "Soda water", "Lime wedge and mint sprig for garnish"],
+            "steps": [
+              "Muddle raspberries, mint leaves, and sugar in a glass.",
+              "Add lime juice and rum, then fill the glass with ice.",
+              "Top with soda water and stir gently.",
+              "Garnish with a lime wedge and mint sprig."
+            ]
+          },
+          "color": "#E30B5C",
+          "recommended": false,
+          "glass_path": "/glass1.glb"
+        },
+        {
+          "name": "Pink Lady",
+          "description": "A sweet and smooth cocktail made with gin, applejack, lemon juice, grenadine, and egg white.",
+          "recipe": {
+            "ingredients": ["1.5 oz gin", "0.5 oz applejack", "0.5 oz lemon juice", "0.25 oz grenadine", "1 egg white", "Cherry for garnish"],
+            "steps": [
+              "Add all ingredients to a shaker without ice and shake well.",
+              "Add ice to the shaker and shake again.",
+              "Strain into a chilled glass.",
+              "Garnish with a cherry."
+            ]
+          },
+          "color": "#FFC0CB",
+          "recommended": false,
+          "glass_path": "/glass3.glb"
+        },
+        {
+          "name": "French 75",
+          "description": "A bubbly cocktail made with gin, champagne, lemon juice, and sugar.",
+          "recipe": {
+            "ingredients": ["1 oz gin", "0.5 oz lemon juice", "0.5 oz simple syrup", "Champagne", "Lemon twist for garnish"],
+            "steps": [
+              "Add gin, lemon juice, and simple syrup to a shaker filled with ice.",
+              "Shake well and strain into a champagne flute.",
+              "Top with champagne.",
+              "Garnish with a lemon twist."
+            ]
+          },
+          "color": "#FFFACD",
+          "recommended": false,
+          "glass_path": "/glass5.glb"
+        }
+      ]
+    },
+    {
+      "category": "Additional Recommended Cocktails",
+      "cocktails": [
+        {
+          "name": "Bloody Mary",
+          "description": "A spicy cocktail made with vodka and tomato juice.",
+          "recipe": {
+            "ingredients": ["2 oz vodka", "4 oz tomato juice", "0.5 oz lemon juice", "2-3 dashes hot sauce", "2-3 dashes Worcestershire sauce", "Celery salt and pepper to taste", "Celery stalk and lemon wedge for garnish"],
+            "steps": [
+              "Add all ingredients to a shaker with ice.",
+              "Roll the mixture between the shaker and another glass.",
+              "Strain into a glass filled with ice.",
+              "Garnish with a celery stalk and lemon wedge."
+            ]
+          },
+          "color": "#FF6347",
+          "recommended": false,
+          "glass_path": "/glass1.glb"
+        },
+        {
+          "name": "Paper Plane",
+          "description": "A balanced cocktail made with bourbon, Aperol, Amaro Nonino, and lemon juice.",
+          "recipe": {
+            "ingredients": ["0.75 oz bourbon", "0.75 oz Aperol", "0.75 oz Amaro Nonino", "0.75 oz lemon juice", "Lemon twist for garnish"],
+            "steps": [
+              "Add all ingredients to a shaker filled with ice.",
+              "Shake well and strain into a chilled glass.",
+              "Garnish with a lemon twist."
+            ]
+          },
+          "color": "#FFA07A",
+          "recommended": false,
+          "glass_path": "/glass3.glb"
+        },
+        {
+          "name": "Aperol Spritz",
+          "description": "A light and refreshing cocktail made with Aperol, Prosecco, and soda water.",
+          "recipe": {
+            "ingredients": ["3 oz Aperol", "3 oz Prosecco", "1 oz soda water", "Orange slice for garnish"],
+            "steps": [
+              "Fill a glass with ice.",
+              "Add Aperol and Prosecco.",
+              "Top with soda water.",
+              "Garnish with an orange slice."
+            ]
+          },
+          "color": "#FF4500",
+          "recommended": true,
+          "glass_path": "/glass3.glb"
+        },
+        {
+          "name": "Madmouazelle",
+          "description": "A fruity cocktail made with vodka, peach schnapps, and cranberry juice.",
+          "recipe": {
+            "ingredients": ["1.5 oz vodka", "1 oz peach schnapps", "2 oz cranberry juice", "Lime wedge for garnish"],
+            "steps": [
+              "Add vodka, peach schnapps, and cranberry juice to a shaker filled with ice.",
+              "Shake well and strain into a glass filled with ice.",
+              "Garnish with a lime wedge."
+            ]
+          },
+          "color": "#FF69B4",
+          "recommended": false,
+          "glass_path": "/glass3.glb"
+        },
+        {
+          "name": "Hibiscus Margarita",
+          "description": "A vibrant cocktail made with tequila, hibiscus syrup, and lime juice.",
+          "recipe": {
+            "ingredients": ["2 oz tequila", "1 oz hibiscus syrup", "1 oz lime juice", "Lime wheel for garnish"],
+            "steps": [
+              "Add tequila, hibiscus syrup, and lime juice to a shaker filled with ice.",
+              "Shake well and strain into a glass with a salted rim.",
+              "Garnish with a lime wheel."
+            ]
+          },
+          "color": "#FF00FF",
+          "recommended": false,
+          "glass_path": "/glass4.glb"
+        }
+      ]
+    }
+  ]
+  

@@ -1,123 +1,133 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from '@emotion/styled';
 
 interface InteractiveDescriptionProps {
   className?: string;
-  description: string;
-  additionalContent: string;
+  cocktailFamily: string,
+  cocktailDescr: string,
+  recipeDescr: string,
   color?: string;
+  hoverColor?: string; // New prop for hover color
 }
 
-const DescriptionContainer = styled.div<{ color?: string }>`
-  perspective: 1500px;
+const ButtonContainer = styled.div`
+  perspective: 1000px;
   display: flex;
-  box-sizing: border-box;
-  height: 61.8%;
-  margin-top: 1.618vh;
-  margin-left: 16.18vw;
-  width: calc(100% - 16.18vw);
-  position: relative;
-  transition: transform 0.3s ease-in-out;
-
-  &:hover {
-    transform: scale(1.05);
-  }
-
-  @media (max-width: 900px) {
-    margin-left: 5vw;
-    width: calc(100% - 10vw);
-  }
-
-  @media (max-width: 600px) {
-    width: 90vw;
-    margin-left: 5vw;
-  }
-
-  @media (max-width: 400px) {
-    width: 80vw;
-  }
-`;
-
-const DescriptionContent = styled.div<{ isFlipped: boolean }>`
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  transition: transform 0.8s;
-  transform-style: preserve-3d;
-  transform: ${({ isFlipped }) => (isFlipped ? 'rotateX(180deg)' : 'rotateX(0)')};
-`;
-
-const DescriptionFace = styled.div<{ isBack?: boolean; color?: string, isHovered?: boolean }>`
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: ${({ isHovered }) => (isHovered ? '#ff7e5f' : 'black')};
-  border: 1px solid ${({ isHovered }) => (isHovered ? '#feb47b' : 'blue')};
-  padding: 20px;
-  text-align: center;
-  color: ${({ isHovered }) => (isHovered ? '#ffffff' : '#333')};
-  transform: ${({ isBack }) => (isBack ? 'rotateX(180deg)' : 'rotateX(0)')};
-  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+  height: 100%;
+  width: 100%;
+`;
+
+const ButtonContent = styled.div<{ rotationY: number; rotationX: number; isClicked: boolean; isHovered: boolean }>`
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.4s;
+  transform: ${({ rotationY, rotationX }) => `rotateY(${rotationY - 20}deg) rotateX(${rotationX * 10}deg) scale(0.95)`};
+
+  &:hover {
+    transform: ${({ rotationY, rotationX }) => `rotateY(${rotationY - 25}deg) rotateX(${rotationX * 15}deg) scale(1.00)`};
+  }
+`;
+
+const Face = styled.div<{ bgColor?: string; hoverColor?: string; width: number; height: number; transform: string; isHovered: boolean }>`
+  position: absolute;
+  width: ${({ width }) => width}px;
+  height: ${({ height }) => height}px;
+  background-color: ${({ bgColor, hoverColor, isHovered }) => (isHovered ? hoverColor || bgColor : bgColor || 'black')};
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backface-visibility: hidden;
+  border: 2.5px solid ${({bgColor}) => bgColor};
+  transform: ${({ transform }) => transform};
+  left: ${({ width }) => -width / 2}px;
+  top: ${({ height }) => -height / 2}px;
+  border-radius: 2px; /* Rounded edges */
 `;
 
 const Title = styled.h2`
-  font-size: 24px;
-  margin-bottom: 10px;
-  color: #333;
+  font-size: 18px;
+  margin: 0;
+  color: #FFD700; /* Modern gold color for titles */
 `;
 
 const Description = styled.p`
-  font-size: 16px;
-  color: inherit;
+  font-size: 14px;
+  margin: 0;
+  color: #FFD700; /* Modern gold color for description */
 `;
 
 const InteractiveDescription: React.FC<InteractiveDescriptionProps> = ({
   className,
-  description,
-  additionalContent,
-  color,
+  cocktailFamily: subTitle,
+  cocktailDescr,
+  recipeDescr,
+  color = '#1E1E1E', // Modern dark color for cuboid faces
+  hoverColor = '#333333', // Default hover color
 }) => {
-  const [isFlipped, setIsFlipped] = useState(false);
+  const [rotationY, setRotationY] = useState(0);
+  const [rotationX, setRotationX] = useState(1);
+  const [isClicked, setIsClicked] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+  const [containerDimensions, setContainerDimensions] = useState({ width: 0, height: 0 });
+
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (containerRef.current) {
+      const { width, height } = containerRef.current.getBoundingClientRect();
+      setContainerDimensions({ width, height });
+    }
+  }, []);
 
   const handleFlip = () => {
-    setIsFlipped(!isFlipped);
+    setRotationY((prevRotationY) => prevRotationY + 180);
+    setRotationX((prevRotationX) => -prevRotationX);
+    setIsClicked(true);
+    setTimeout(() => setIsClicked(false), 600); // Reset isClicked after animation duration
   };
 
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
+
+  const depth = 200;
+  const width = containerDimensions.width * 0.75;
+  const height = containerDimensions.height * 0.75;
+
   return (
-    <DescriptionContainer
-      className={className}
-      color={color}
-      onClick={handleFlip}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      aria-live="polite"
-      role="button"
-      tabIndex={0}
-      onKeyDown={(e) => (e.key === 'Enter' ? handleFlip() : null)}
-    >
-      <DescriptionContent isFlipped={isFlipped}>
-        <DescriptionFace isHovered={isHovered} color={color}>
-          <Title>Front</Title>
-          <Description>{description}</Description>
-        </DescriptionFace>
-        <DescriptionFace isBack isHovered={isHovered} color={color}>
-          <Title>Back</Title>
-          <Description>{additionalContent}</Description>
-        </DescriptionFace>
-      </DescriptionContent>
-    </DescriptionContainer>
+    <ButtonContainer className={className} ref={containerRef}>
+      <ButtonContent
+        onClick={() => handleFlip()}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        rotationY={rotationY}
+        rotationX={rotationX}
+        isClicked={isClicked}
+        isHovered={isHovered}
+      >
+        <Face bgColor={color} hoverColor={hoverColor} width={width} height={height} transform={`translateZ(${depth / 2}px)`} isHovered={isHovered}>
+          <Title>{subTitle}</Title>
+          <Description>{cocktailDescr}</Description>
+        </Face>
+        <Face bgColor={color} hoverColor={hoverColor} width={width} height={height} transform={`rotateY(180deg) translateZ(${depth / 2}px)`} isHovered={isHovered}>
+          <Title>Recipe</Title>
+          <Description>{recipeDescr}</Description>
+        </Face>
+        <Face bgColor={color} hoverColor={hoverColor} width={depth} height={height} transform={`rotateY(90deg) translateZ(${width / 2}px)`} isHovered={isHovered}></Face>
+        <Face bgColor={color} hoverColor={hoverColor} width={depth} height={height} transform={`rotateY(-90deg) translateZ(${width / 2}px)`} isHovered={isHovered}></Face>
+        <Face bgColor={color} hoverColor={hoverColor} width={width} height={depth} transform={`rotateX(90deg) translateZ(${height / 2}px)`} isHovered={isHovered}></Face>
+        <Face bgColor={color} hoverColor={hoverColor} width={width} height={depth} transform={`rotateX(-90deg) translateZ(${height / 2}px)`} isHovered={isHovered}></Face>
+      </ButtonContent>
+    </ButtonContainer>
   );
 };
 

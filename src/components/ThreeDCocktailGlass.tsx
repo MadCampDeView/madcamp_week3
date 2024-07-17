@@ -42,9 +42,19 @@ const Glass: React.FC<{ isHovered: boolean; setIsHovered: (hovered: boolean) => 
       if (!isHovered) {
         glassRef.current.rotation.y += 0.025; // Rotate slowly around the Y-axis
       } else {
-        glassRef.current.rotation.y += 0.015;
+        glassRef.current.rotation.y += 0.010;
       }
     }
+  });
+
+  const introProps = useSpring({
+    from: { opacity: 0, scale: 0.8 },
+    to: async (next) => {
+      await next({ opacity: 1, scale: 1.05 });
+      await next({ scale: 0.95 });
+      await next({ scale: 1 });
+    },
+    config: { duration: 600, easing: (t) => t * (2 - t) }, // cubic-bezier(0.4, 0, 0.2, 1) approximation
   });
 
   const props = useSpring({
@@ -62,6 +72,7 @@ const Glass: React.FC<{ isHovered: boolean; setIsHovered: (hovered: boolean) => 
       rotation={[0.1, 0, 0.1]} // Tilt the glass a bit
       onPointerOver={() => setIsHovered(true)}
       onPointerOut={() => setIsHovered(false)}
+      style={introProps}
     />
   );
 };

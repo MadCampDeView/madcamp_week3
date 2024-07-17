@@ -1,3 +1,4 @@
+/* Global CSS Reset */
 * {
   box-sizing: border-box;
   padding: 0;
@@ -12,7 +13,6 @@ body {
   padding: 0;
   max-width: 100vw;
   overflow-x: hidden;
-  background-color: black;
 }
 
 body {
@@ -25,9 +25,27 @@ body {
     rgb(var(--background-start-rgb));
 }
 
+/* Additional reset for all elements */
+body, h1, h2, h3, h4, h5, h6, p, ol, ul, li, figure, figcaption, blockquote, dl, dd {
+  margin: 0;
+  padding: 0;
+}
+
+/* Ensure that anchor tags and other inline elements don't have margins */
 a {
   color: inherit;
   text-decoration: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Box sizing inheritance */
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
 }
 
 @media (prefers-color-scheme: dark) {

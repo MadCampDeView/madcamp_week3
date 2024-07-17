@@ -63,6 +63,10 @@ const SwiperSlideStyled = styled(SwiperSlide)`
   padding: 0; /* Adjust padding if necessary to give more space */
 `;
 
+const SwiperStyled = styled(Swiper)`
+  padding: 5%; /* Add padding to the Swiper component */
+`;
+
 const Carousel = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [spaceBetween, setSpaceBetween] = useState(100); // Default space between slides
@@ -116,7 +120,7 @@ const Carousel = () => {
 
   return (
     <CarouselContainer>
-      <Swiper
+      <SwiperStyled
         modules={[Pagination, Navigation]}
         slidesPerView={3.2} /* Adjust the slidesPerView */
         centeredSlides={true} /* Center the slides */
@@ -152,7 +156,7 @@ const Carousel = () => {
             </SwiperSlideStyled>
           );
         })}
-      </Swiper>
+      </SwiperStyled>
     </CarouselContainer>
   );
 };

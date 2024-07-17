@@ -1,27 +1,17 @@
 .container {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+  padding: 1.618vh;
   padding: 5vh;
   height: 100vh;
-  background-color: #000000;
   box-sizing: border-box;
-  /* overflow: hidden; */
-}
-
-.imageContentWrapper {
-  display: flex;
-  justify-content: flex-start;
-  align-items: stretch;
-  padding: 1.618vh;
-  box-sizing: border-box;
-  height: 100%;
-  width: 100%;
   /* overflow: hidden; */
 }
 
 .cocktailContainer {
-  width: 38.2%;
+  width: 30%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -29,113 +19,38 @@
   /* overflow: hidden; */
 }
 
-/* .image {
-  max-width: 100%;
-  max-height: 100%;
-  padding: 10%;
-  object-fit: contain;
-  overflow: hidden;
-  box-sizing: border-box;
-} */
-
 .content {
+  width: 70%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 61.8%;
   padding: 2vh;
   box-sizing: border-box;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .titleWrapper {
   display: flex;
   justify-content: flex-start;
-  margin-right: 3.236vw;
+  margin-right: 8.09vw;
   margin-bottom: 1.618vh;
   height: 38.2%;
-  border: 1px solid blue;
+  /* border: 1px solid blue; */
   border-radius: 5px;
   box-sizing: border-box;
-  overflow: hidden;
-  transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+  /* overflow: hidden; */
+  animation: floating 6s ease-in-out infinite;
 }
 
-.titleWrapper:hover {
-  background-color: #590cff;
-}
-
-.titleWrapper:hover .title {
-  color: #ffffff;
-}
-
-.title {
-  font-size: 4vw;
-  color: blue;
-  margin: 0;
-  padding: 10px;
-  height: 100%;
+.descriptionWrapper {
   display: flex;
-  align-items: center;
+  justify-content: flex-start;
+  margin-left: 8.09vw;
+  margin-top: 1.618vh;
+  height: 61.8%;
+  /* border: 1px solid blue; */
+  border-radius: 5px;
   box-sizing: border-box;
-  overflow: hidden;
-  transition: color 0.3s ease-in-out;
-}
-
-@keyframes fadeInOut {
-  0%, 2%{
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  98%, 100% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  6%, 94% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animateCocktail {
-  animation: appearFromDark 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-  animation-fill-mode: both;
-}
-
-.animateTitle {
-  animation: fadeInOut 4s infinite;
-}
-
-.animateDescription {
-  animation: popUp 0.9s ease-in-out forwards;
-}
-
-@keyframes appearFromDark {
-  0% {
-    opacity: 0;
-    transform: scale(0.8);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.05);
-  }
-  70% {
-    opacity: 1;
-    transform: scale(0.95);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes popUp {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  animation: floating 6s ease-in-out infinite;
 }

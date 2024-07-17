@@ -96,7 +96,10 @@ const Carousel = () => {
                 title: cocktail.name,
                 description: cocktail.description,
                 bgColor: cocktail.color,
-                textColor: cocktail.textColor
+                textColor: cocktail.textColor,
+                image: "/images/" + cocktail.name + ".png",
+                category: category.category,
+                ingredients: cocktail.recipe.ingredients
               });
             }
           }
@@ -151,6 +154,9 @@ const Carousel = () => {
                 hitboxClass=""
                 title={cocktail.title}
                 description={cocktail.description}
+                image={cocktail.image}
+                category={cocktail.category}
+                ingredients={cocktail.ingredients}
                 position={position}
                 bgColor={cocktail.bgColor} // Pass the color prop
                 textColor={cocktail.textColor}

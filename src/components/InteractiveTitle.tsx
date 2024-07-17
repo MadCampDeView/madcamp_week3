@@ -40,12 +40,14 @@ const Face = styled.div<{ bgColor: string; hoverColor: string; backColor: string
   height: ${({ height }) => height}px;
   background-color: ${({ isRed, bgColor, hoverColor, backColor, isHovered }) =>
     isRed ? backColor : isHovered ? hoverColor : bgColor};
-  color: ${({ textColor }) => textColor};
+  color: ${({ isRed, bgColor, textColor }) => 
+    isRed ? bgColor : textColor};
   display: flex;
   align-items: center;
   justify-content: center;
   backface-visibility: hidden;
-  border: 2.5px solid ${({ bgColor }) => bgColor};
+  border: 2.5px solid ${({ isRed, bgColor, backColor }) =>
+    isRed ? backColor : bgColor};
   transform: ${({ transform }) => transform};
   left: ${({ width }) => -width / 2}px;
   top: ${({ height }) => -height / 2}px;

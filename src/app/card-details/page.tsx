@@ -34,7 +34,8 @@ const CardDetailsPage: React.FC = () => {
                 bgColor: cocktail.color, // Ensure bgColor is fetched from data
                 hoverColor: cocktail.hoverColor, // Ensure hoverColor is fetched from data
                 textColor: cocktail.textColor, // Ensure textColor is fetched from data
-                backColor: cocktail.backColor
+                backColor: cocktail.backColor,
+                imagePath: "/images/" + cocktail.name + ".png"
               });
               return;
             }
@@ -76,6 +77,7 @@ const CardDetailsPage: React.FC = () => {
             bgColor={cocktailData.bgColor} // Pass the correct color to InteractiveDescription
             hoverColor={cocktailData.hoverColor} // Pass the correct hover color to InteractiveDescription
             textColor={cocktailData.textColor} // Pass the correct text color to InteractiveDescription
+            imagePath={cocktailData.imagePath}
           />
         </div>
       </div>

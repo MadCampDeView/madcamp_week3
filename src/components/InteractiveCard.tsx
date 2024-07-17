@@ -9,6 +9,9 @@ interface InteractiveCardProps {
   hitboxClass?: string;
   title: string;
   description: string;
+  image: string;
+  category: string;
+  ingredients: string[];
   position: 'left' | 'right' | 'center';
   bgColor: string;
   textColor: string;
@@ -17,17 +20,17 @@ interface InteractiveCardProps {
 const CardContainer = styled.div<{ position: 'left' | 'right' | 'center'; bgColor: string; textColor: string }>`
   perspective: 1000px;
   margin: 20px auto;
-  width: 500px;  /* Set a fixed width */
+  width: 500px;
   height: auto;
-  max-width: 95%;  /* Ensure it doesn't exceed the container width */
+  max-width: 95%;
   position: relative;
-  aspect-ratio: 1 / 1.618; /* Maintain aspect ratio */
-  overflow: visible; /* Allow hitbox to overflow */
+  aspect-ratio: 1 / 1.618;
+  overflow: visible;
   @media (max-width: 600px) {
-    width: 250px;  /* Adjust width for smaller screens */
+    width: 250px;
   }
   @media (max-width: 400px) {
-    width: 200px;  /* Adjust width for even smaller screens */
+    width: 200px;
   }
 `;
 
@@ -65,18 +68,49 @@ const Title = styled.h2`
   margin-bottom: 10px;
 `;
 
+const Image = styled.img`
+  width: 80%;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 10px;
+`;
+
+const CocktailFamily = styled.p`
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 20px;
+`;
+
 const Description = styled.p`
   font-size: 16px;
+  margin-bottom: 10px;
 `;
+
+const IngredientsList = styled.ul`
+  list-style-type: none;
+  padding: 0;
+  font-size: 16px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  max-height: 150px;
+  overflow-y: auto;
+  text-align: left;
+`;
+
+const Ingredient = styled.li`
+  margin: 5px 0;
+  line-height: 1.5;
+`;
+
 
 const Hitbox = styled.div`
   position: absolute;
   justify-content: center;
   align-items: center;
-  top: -20%; /* Increase the hitbox area */
-  left: -20%; /* Increase the hitbox area */
-  width: 140%; /* Increase the hitbox area */
-  height: 140%; /* Increase the hitbox area */
+  top: -10%;
+  left: -10%;
+  width: 120%;
+  height: 120%;
   cursor: pointer;
   z-index: 1;
 `;
@@ -102,14 +136,14 @@ const ShineContainer = styled.div<{ x: number; y: number }>`
   position: absolute;
   top: ${({ y }) => y - 100}px;
   left: ${({ x }) => x - 500}px;
-  background: linear-gradient(0, rgba(255,255,255,0) 0%, rgba(255,255,255,0.1) 30%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0.15) 80%, rgba(255,255,255,0) 100%);
+  background: linear-gradient(0, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.1) 30%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0.15) 80%, rgba(255, 255, 255, 0) 100%);
   transform: rotate(-35deg);
   pointer-events: none;
   opacity: 1;
   transition: transform 0.5s;
 `;
 
-const InteractiveCard: React.FC<InteractiveCardProps> = ({ className, hitboxClass, title, description, position, bgColor, textColor }) => {
+const InteractiveCard: React.FC<InteractiveCardProps> = ({ className, hitboxClass, title, description, image, category, ingredients, position, bgColor, textColor }) => {
   const [isFlipped, setIsFlipped] = useState(false);
   const [lightPosition, setLightPosition] = useState({ x: 0, y: 0 });
   const [isLightVisible, setIsLightVisible] = useState(false);
@@ -133,8 +167,8 @@ const InteractiveCard: React.FC<InteractiveCardProps> = ({ className, hitboxClas
 
     const cardRect = card.getBoundingClientRect();
 
-    const x = e.clientX - cardRect.left; // x position within the element.
-    const y = e.clientY - cardRect.top;  // y position within the element.
+    const x = e.clientX - cardRect.left;
+    const y = e.clientY - cardRect.top;
 
     setLightPosition({ x, y });
 
@@ -144,8 +178,8 @@ const InteractiveCard: React.FC<InteractiveCardProps> = ({ className, hitboxClas
     const deltaX = (centerX - x) / centerX;
     const deltaY = (y - centerY) / centerY;
 
-    const rotateY = Math.sin(deltaX * (Math.PI / 2)) * 7.5; // max rotation is 10 degrees
-    const rotateX = Math.sin(deltaY * (Math.PI / 2)) * 7.5; // max rotation is 10 degrees
+    const rotateY = Math.sin(deltaX * (Math.PI / 2)) * 7.5;
+    const rotateX = Math.sin(deltaY * (Math.PI / 2)) * 7.5;
 
     if (position === 'center') card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.00)`;
     if (position === 'left') card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY - 15}deg) scale(0.90)`;
@@ -200,11 +234,17 @@ const InteractiveCard: React.FC<InteractiveCardProps> = ({ className, hitboxClas
       <CardContent isFlipped={isFlipped}>
         <CardFace bgColor={bgColor} textColor={textColor}>
           <Title>{title}</Title>
-          <Description>{description}</Description>
+          <Image src={image} alt={title} />
+          <CocktailFamily>{category}</CocktailFamily>
         </CardFace>
         <CardFace isBack bgColor={bgColor} textColor={textColor}>
+          <Description>{description}</Description>
+          <IngredientsList>
+            {ingredients.map((ingredient, index) => (
+              <Ingredient key={index}>{ingredient}</Ingredient>
+            ))}
+          </IngredientsList>
           <LightEffect x={lightPosition.x} y={lightPosition.y} isVisible={isLightVisible} />
-          <p>Additional content on the back.</p>
           <ShineContainer x={shinePosition.avgX} y={shinePosition.avgY} />
         </CardFace>
       </CardContent>

@@ -11,14 +11,14 @@ const SpreadEffectContainer = styled.div<{ color: string; x: number; y: number; 
   height: 100vh;
   background-color: ${({ color }) => color};
   z-index: ${({ color }) => (color === 'black' ? 1000 : 999)};
-  animation: spreadEffect 0.75s forwards ${({ delay }) => delay};
+  animation: spreadEffect 1.5s forwards ${({ delay }) => delay};
   clip-path: circle(0% at ${({ x, y }) => `${x}px ${y}px`});
 
   @keyframes spreadEffect {
     0% {
       clip-path: circle(0% at ${({ x, y }) => `${x}px ${y}px`});
     }
-    100% {
+    50% {
       clip-path: circle(150% at ${({ x, y }) => `${x}px ${y}px`});
     }
   }

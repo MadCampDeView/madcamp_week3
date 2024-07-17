@@ -16,7 +16,7 @@
                 "color": "#080f14",
                 "textColor": "#a0b8c4",
                 "hoverColor": "#0b131a",
-                "backColor": "#a0b8c4",
+                "backColor": "#162028",
                 "recommended": false,
                 "glass_path": "/glass3.glb"
             },
@@ -34,7 +34,7 @@
                 "color": "#574b23",
                 "textColor": "#d8dbd5",
                 "hoverColor": "#6a5a2c",
-                "backColor": "#d8dbd5",
+                "backColor": "#3b2e1a",
                 "recommended": true,
                 "glass_path": "/glass4.glb"
             },
@@ -53,7 +53,7 @@
                 "color": "#a5b48e",
                 "textColor": "#cdd0cc",
                 "hoverColor": "#bac59e",
-                "backColor": "#cdd0cc",
+                "backColor": "#6d7856",
                 "recommended": false,
                 "glass_path": "/glass1.glb"
             },
@@ -71,7 +71,7 @@
                 "color": "#FFC107",
                 "textColor": "#FFFFFF",
                 "hoverColor": "#ffcb2f",
-                "backColor": "#FFFFFF",
+                "backColor": "#bf8c07",
                 "recommended": false,
                 "glass_path": "/glass4.glb"
             },
@@ -89,7 +89,7 @@
                 "color": "#713927",
                 "textColor": "#221311",
                 "hoverColor": "#8b4a32",
-                "backColor": "#221311",
+                "backColor": "#4a2419",
                 "recommended": true,
                 "glass_path": "/glass6.glb"
             },
@@ -107,7 +107,7 @@
                 "color": "#d6cfcd",
                 "textColor": "#c0875c",
                 "hoverColor": "#e1dbd9",
-                "backColor": "#c0875c",
+                "backColor": "#8c837f",
                 "recommended": true,
                 "glass_path": "/glass4.glb"
             }
@@ -130,7 +130,7 @@
                 "color": "#4e5829",
                 "textColor": "#cfcec1",
                 "hoverColor": "#616f34",
-                "backColor": "#cfcec1",
+                "backColor": "#2f3415",
                 "recommended": true,
                 "glass_path": "/glass3.glb"
             },
@@ -148,7 +148,7 @@
                 "color": "#ebad3f",
                 "textColor": "#cfcbcb",
                 "hoverColor": "#f1bf66",
-                "backColor": "#cfcbcb",
+                "backColor": "#ab7027",
                 "recommended": false,
                 "glass_path": "/glass5.glb"
             },
@@ -166,7 +166,7 @@
                 "color": "#aeaba5",
                 "textColor": "#2e2824",
                 "hoverColor": "#c4c1bb",
-                "backColor": "#2e2824",
+                "backColor": "#6d6a65",
                 "recommended": false,
                 "glass_path": "/glass3.glb"
             },
@@ -184,7 +184,7 @@
                 "color": "#29B6F6",
                 "textColor": "#FFFFFF",
                 "hoverColor": "#3dc0f7",
-                "backColor": "#FFFFFF",
+                "backColor": "#176b96",
                 "recommended": false,
                 "glass_path": "/glass4.glb"
             },
@@ -202,7 +202,7 @@
                 "color": "#b3977d",
                 "textColor": "#5d3c24",
                 "hoverColor": "#c7ab91",
-                "backColor": "#5d3c24",
+                "backColor": "#7d614d",
                 "recommended": false,
                 "glass_path": "/glass3.glb"
             },
@@ -220,7 +220,7 @@
                 "color": "#6f5033",
                 "textColor": "#110903",
                 "hoverColor": "#846145",
-                "backColor": "#110903",
+                "backColor": "#3e2e1d",
                 "recommended": false,
                 "glass_path": "/glass5.glb"
             }
@@ -243,7 +243,7 @@
                 "color": "#5c2410",
                 "textColor": "#e8cab4",
                 "hoverColor": "#6f2d13",
-                "backColor": "#e8cab4",
+                "backColor": "#382511",
                 "recommended": true,
                 "glass_path": "/glass2.glb"
             },
@@ -261,7 +261,7 @@
                 "color": "#EC407A",
                 "textColor": "#FFFFFF",
                 "hoverColor": "#f25890",
-                "backColor": "#FFFFFF",
+                "backColor": "#8b2a4d",
                 "recommended": false,
                 "glass_path": "/glass3.glb"
             },
@@ -279,7 +279,7 @@
                 "color": "#8BC34A",
                 "textColor": "#FFFFFF",
                 "hoverColor": "#9fd95a",
-                "backColor": "#FFFFFF",
+                "backColor": "#5d7c31",
                 "recommended": false,
                 "glass_path": "/glass3.glb"
             },
@@ -298,7 +298,7 @@
                 "color": "#b27f25",
                 "textColor": "#f9f3ed",
                 "hoverColor": "#c39531",
-                "backColor": "#f9f3ed",
+                "backColor": "#7e5d1a",
                 "recommended": false,
                 "glass_path": "/glass1.glb"
             },
@@ -317,7 +317,7 @@
                 "color": "#0f0c06",
                 "textColor": "#dac4c1",
                 "hoverColor": "#13100a",
-                "backColor": "#dac4c1",
+                "backColor": "#47312f",
                 "recommended": false,
                 "glass_path": "/glass3.glb"
             },
@@ -336,7 +336,7 @@
                 "color": "#9a794c",
                 "textColor": "#0d0f18",
                 "hoverColor": "#af8f60",
-                "backColor": "#0d0f18",
+                "backColor": "#56402b",
                 "recommended": false,
                 "glass_path": "/glass5.glb"
             }
@@ -360,7 +360,7 @@
                 "color": "#D32F2F",
                 "textColor": "#FFFFFF",
                 "hoverColor": "#dd4343",
-                "backColor": "#FFFFFF",
+                "backColor": "#821a1a",
                 "recommended": false,
                 "glass_path": "/glass1.glb"
             },
@@ -378,7 +378,7 @@
                 "color": "#e5e4e7",
                 "textColor": "#f77e3c",
                 "hoverColor": "#edecee",
-                "backColor": "#f77e3c",
+                "backColor": "#b2b0b3",
                 "recommended": false,
                 "glass_path": "/glass3.glb"
             },
@@ -397,7 +397,7 @@
                 "color": "#FFA726",
                 "textColor": "#FFFFFF",
                 "hoverColor": "#ffb84f",
-                "backColor": "#FFFFFF",
+                "backColor": "#b7741a",
                 "recommended": true,
                 "glass_path": "/glass3.glb"
             },
@@ -415,7 +415,7 @@
                 "color": "#351c09",
                 "textColor": "#d89a64",
                 "hoverColor": "#4c2811",
-                "backColor": "#d89a64",
+                "backColor": "#755232",
                 "recommended": false,
                 "glass_path": "/glass3.glb"
             },
@@ -433,7 +433,7 @@
                 "color": "#f1e0d9",
                 "textColor": "#ea501d",
                 "hoverColor": "#f4e8e3",
-                "backColor": "#ea501d",
+                "backColor": "#ba8271",
                 "recommended": false,
                 "glass_path": "/glass4.glb"
             }

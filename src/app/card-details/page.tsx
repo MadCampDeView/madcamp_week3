@@ -30,7 +30,11 @@ const CardDetailsPage: React.FC = () => {
                 description: cocktail.description,
                 ingredients: cocktail.recipe.ingredients,
                 recipe: cocktail.recipe.steps,
-                glassPath: cocktail.glass_path
+                glassPath: cocktail.glass_path,
+                bgColor: cocktail.color, // Ensure bgColor is fetched from data
+                hoverColor: cocktail.hoverColor, // Ensure hoverColor is fetched from data
+                textColor: cocktail.textColor, // Ensure textColor is fetched from data
+                backColor: cocktail.backColor
               });
               return;
             }
@@ -58,6 +62,9 @@ const CardDetailsPage: React.FC = () => {
         <div className={styles.titleWrapper}>
           <InteractiveTitle
             title={title}
+            bgColor={cocktailData.textColor} 
+            textColor={cocktailData.bgColor}
+            backColor={cocktailData.backColor}
           />
         </div>
         <div className={styles.descriptionWrapper}>
@@ -66,6 +73,9 @@ const CardDetailsPage: React.FC = () => {
             cocktailDescr={cocktailData.description}
             ingredients={cocktailData.ingredients}
             recipeDescr={cocktailData.recipe}
+            bgColor={cocktailData.bgColor} // Pass the correct color to InteractiveDescription
+            hoverColor={cocktailData.hoverColor} // Pass the correct hover color to InteractiveDescription
+            textColor={cocktailData.textColor} // Pass the correct text color to InteractiveDescription
           />
         </div>
       </div>

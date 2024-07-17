@@ -5,11 +5,13 @@ import styled from '@emotion/styled';
 
 interface InteractiveDescriptionProps {
   className?: string;
-  cocktailFamily: string,
-  cocktailDescr: string,
-  recipeDescr: string,
-  color?: string;
-  hoverColor?: string; // New prop for hover color
+  cocktailFamily: string;
+  cocktailDescr: string;
+  ingredients: string[];
+  recipeDescr: string[];
+  bgColor: string;
+  hoverColor: string;
+  textColor: string;
 }
 
 const ButtonContainer = styled.div`
@@ -32,42 +34,54 @@ const ButtonContent = styled.div<{ rotationY: number; rotationX: number; isClick
   }
 `;
 
-const Face = styled.div<{ bgColor?: string; hoverColor?: string; width: number; height: number; transform: string; isHovered: boolean }>`
+const Face = styled.div<{ bgColor: string; hoverColor: string; width: number; height: number; transform: string; isHovered: boolean }>`
   position: absolute;
   width: ${({ width }) => width}px;
   height: ${({ height }) => height}px;
-  background-color: ${({ bgColor, hoverColor, isHovered }) => (isHovered ? hoverColor || bgColor : bgColor || 'black')};
-  color: #fff;
+  background-color: ${({ bgColor, hoverColor, isHovered }) => (isHovered ? hoverColor : bgColor)};
   display: flex;
   align-items: center;
   justify-content: center;
   backface-visibility: hidden;
-  border: 2.5px solid ${({bgColor}) => bgColor};
+  border: 2.5px solid ${({ bgColor }) => bgColor};
   transform: ${({ transform }) => transform};
   left: ${({ width }) => -width / 2}px;
   top: ${({ height }) => -height / 2}px;
   border-radius: 2px; /* Rounded edges */
 `;
 
-const Title = styled.h2`
+const Title = styled.h2<{ textColor: string }>`
   font-size: 18px;
   margin: 0;
-  color: #FFD700; /* Modern gold color for titles */
+  color: ${({ textColor }) => textColor}; /* Text color */
 `;
 
-const Description = styled.p`
+const Description = styled.p<{ textColor: string }>`
   font-size: 14px;
   margin: 0;
-  color: #FFD700; /* Modern gold color for description */
+  color: ${({ textColor }) => textColor}; /* Text color */
+`;
+
+const List = styled.ul<{ textColor: string }>`
+  padding-left: 20px;
+  margin: 0;
+  color: ${({ textColor }) => textColor}; /* Text color */
+`;
+
+const ListItem = styled.li<{ textColor: string }>`
+  font-size: 14px;
+  color: ${({ textColor }) => textColor}; /* Text color */
 `;
 
 const InteractiveDescription: React.FC<InteractiveDescriptionProps> = ({
   className,
-  cocktailFamily: subTitle,
+  cocktailFamily,
   cocktailDescr,
+  ingredients,
   recipeDescr,
-  color = '#1E1E1E', // Modern dark color for cuboid faces
-  hoverColor = '#333333', // Default hover color
+  bgColor,
+  hoverColor,
+  textColor
 }) => {
   const [rotationY, setRotationY] = useState(0);
   const [rotationX, setRotationX] = useState(1);
@@ -106,7 +120,7 @@ const InteractiveDescription: React.FC<InteractiveDescriptionProps> = ({
   return (
     <ButtonContainer className={className} ref={containerRef}>
       <ButtonContent
-        onClick={() => handleFlip()}
+        onClick={handleFlip}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         rotationY={rotationY}
@@ -114,18 +128,32 @@ const InteractiveDescription: React.FC<InteractiveDescriptionProps> = ({
         isClicked={isClicked}
         isHovered={isHovered}
       >
-        <Face bgColor={color} hoverColor={hoverColor} width={width} height={height} transform={`translateZ(${depth / 2}px)`} isHovered={isHovered}>
-          <Title>{subTitle}</Title>
-          <Description>{cocktailDescr}</Description>
+        <Face bgColor={bgColor} hoverColor={hoverColor} width={width} height={height} transform={`translateZ(${depth / 2}px)`} isHovered={isHovered}>
+          <div>
+            <Title textColor={textColor}>{cocktailFamily}</Title>
+            <Description textColor={textColor}>{cocktailDescr}</Description>
+          </div>
         </Face>
-        <Face bgColor={color} hoverColor={hoverColor} width={width} height={height} transform={`rotateY(180deg) translateZ(${depth / 2}px)`} isHovered={isHovered}>
-          <Title>Recipe</Title>
-          <Description>{recipeDescr}</Description>
+        <Face bgColor={bgColor} hoverColor={hoverColor} width={width} height={height} transform={`rotateY(180deg) translateZ(${depth / 2}px)`} isHovered={isHovered}>
+          <div>
+            <Title textColor={textColor}>Ingredients</Title>
+            <List textColor={textColor}>
+              {ingredients.map((ingredient, index) => (
+                <ListItem textColor={textColor} key={index}>{ingredient}</ListItem>
+              ))}
+            </List>
+            <Title textColor={textColor}>Recipe</Title>
+            <List textColor={textColor}>
+              {recipeDescr.map((step, index) => (
+                <ListItem textColor={textColor} key={index}>{step}</ListItem>
+              ))}
+            </List>
+          </div>
         </Face>
-        <Face bgColor={color} hoverColor={hoverColor} width={depth} height={height} transform={`rotateY(90deg) translateZ(${width / 2}px)`} isHovered={isHovered}></Face>
-        <Face bgColor={color} hoverColor={hoverColor} width={depth} height={height} transform={`rotateY(-90deg) translateZ(${width / 2}px)`} isHovered={isHovered}></Face>
-        <Face bgColor={color} hoverColor={hoverColor} width={width} height={depth} transform={`rotateX(90deg) translateZ(${height / 2}px)`} isHovered={isHovered}></Face>
-        <Face bgColor={color} hoverColor={hoverColor} width={width} height={depth} transform={`rotateX(-90deg) translateZ(${height / 2}px)`} isHovered={isHovered}></Face>
+        <Face bgColor={bgColor} hoverColor={hoverColor} width={depth} height={height} transform={`rotateY(90deg) translateZ(${width / 2}px)`} isHovered={isHovered}></Face>
+        <Face bgColor={bgColor} hoverColor={hoverColor} width={depth} height={height} transform={`rotateY(-90deg) translateZ(${width / 2}px)`} isHovered={isHovered}></Face>
+        <Face bgColor={bgColor} hoverColor={hoverColor} width={width} height={depth} transform={`rotateX(90deg) translateZ(${height / 2}px)`} isHovered={isHovered}></Face>
+        <Face bgColor={bgColor} hoverColor={hoverColor} width={width} height={depth} transform={`rotateX(-90deg) translateZ(${height / 2}px)`} isHovered={isHovered}></Face>
       </ButtonContent>
     </ButtonContainer>
   );

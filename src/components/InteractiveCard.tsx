@@ -10,10 +10,11 @@ interface InteractiveCardProps {
   title: string;
   description: string;
   position: 'left' | 'right' | 'center';
-  color?: string;
+  bgColor: string;
+  textColor: string;
 }
 
-const CardContainer = styled.div<{ position: 'left' | 'right' | 'center'; color?: string }>`
+const CardContainer = styled.div<{ position: 'left' | 'right' | 'center'; bgColor: string; textColor: string }>`
   perspective: 1000px;
   margin: 20px auto;
   width: 500px;  /* Set a fixed width */
@@ -39,7 +40,7 @@ const CardContent = styled.div<{ isFlipped: boolean }>`
   transform: ${({ isFlipped }) => (isFlipped ? 'rotateY(180deg)' : 'rotateY(0)')};
 `;
 
-const CardFace = styled.div<{ isBack?: boolean; color?: string }>`
+const CardFace = styled.div<{ isBack?: boolean; bgColor: string; textColor: string }>`
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
@@ -50,25 +51,22 @@ const CardFace = styled.div<{ isBack?: boolean; color?: string }>`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: ${({ color }) => color || '#7DF9FF'};
+  background-color: ${({ bgColor }) => bgColor};
+  color: ${({ textColor }) => textColor};
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  // padding: 20px;
   text-align: center;
   overflow: hidden;
-  color: #333;
   transform: ${({ isBack }) => (isBack ? 'rotateY(180deg)' : 'rotateY(0)')};
 `;
 
 const Title = styled.h2`
   font-size: 24px;
   margin-bottom: 10px;
-  color: #333;
 `;
 
 const Description = styled.p`
   font-size: 16px;
-  color: #333;
 `;
 
 const Hitbox = styled.div`
@@ -82,7 +80,6 @@ const Hitbox = styled.div`
   cursor: pointer;
   z-index: 1;
 `;
-
 
 const LightEffect = styled.div<{ x: number; y: number; isVisible: boolean }>`
   position: absolute;
@@ -103,9 +100,8 @@ const ShineContainer = styled.div<{ x: number; y: number }>`
   width: 1000px;
   height: 200px;
   position: absolute;
-  top: ${({ y }) => y-100}px;
-  left: ${({ x }) => x-500}px;
-  // background: linear-gradient(top, transparent, rgba(200,200,200,1));
+  top: ${({ y }) => y - 100}px;
+  left: ${({ x }) => x - 500}px;
   background: linear-gradient(0, rgba(255,255,255,0) 0%, rgba(255,255,255,0.1) 30%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0.15) 80%, rgba(255,255,255,0) 100%);
   transform: rotate(-35deg);
   pointer-events: none;
@@ -113,7 +109,7 @@ const ShineContainer = styled.div<{ x: number; y: number }>`
   transition: transform 0.5s;
 `;
 
-const InteractiveCard: React.FC<InteractiveCardProps> = ({ className, hitboxClass, title, description, position, color }) => {
+const InteractiveCard: React.FC<InteractiveCardProps> = ({ className, hitboxClass, title, description, position, bgColor, textColor }) => {
   const [isFlipped, setIsFlipped] = useState(false);
   const [lightPosition, setLightPosition] = useState({ x: 0, y: 0 });
   const [isLightVisible, setIsLightVisible] = useState(false);
@@ -157,9 +153,7 @@ const InteractiveCard: React.FC<InteractiveCardProps> = ({ className, hitboxClas
 
     const avgX = (centerX + x) / 2;
     const avgY = (centerY + y) / 2;
-    // const avgX = x;
-    // const avgY = y;
-    setShinePosition({avgX, avgY});
+    setShinePosition({ avgX, avgY });
   };
 
   const resetTransform = () => {
@@ -186,11 +180,9 @@ const InteractiveCard: React.FC<InteractiveCardProps> = ({ className, hitboxClas
     const clickX = e.clientX;
     const clickY = e.clientY;
 
-    // Check if the click is within the card bounds
     if (clickX >= cardRect.left && clickX <= cardRect.right && clickY >= cardRect.top && clickY <= cardRect.bottom) {
       const { clientX, clientY } = e;
-      // Update the URL to point to the new location
-      triggerTransition(color || '#7DF9FF', clientX, clientY, `/card-details?name=${encodeURIComponent(title)}`);
+      triggerTransition(bgColor, clientX, clientY, `/card-details?name=${encodeURIComponent(title)}`);
     }
   };
 
@@ -199,20 +191,21 @@ const InteractiveCard: React.FC<InteractiveCardProps> = ({ className, hitboxClas
       className={className}
       ref={cardRef}
       position={position}
-      color={color}
+      bgColor={bgColor}
+      textColor={textColor}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={handleClick}
     >
       <CardContent isFlipped={isFlipped}>
-        <CardFace color={color}>
+        <CardFace bgColor={bgColor} textColor={textColor}>
           <Title>{title}</Title>
           <Description>{description}</Description>
         </CardFace>
-        <CardFace isBack color={color}>
+        <CardFace isBack bgColor={bgColor} textColor={textColor}>
           <LightEffect x={lightPosition.x} y={lightPosition.y} isVisible={isLightVisible} />
           <p>Additional content on the back.</p>
-          <ShineContainer x={shinePosition.avgX} y={shinePosition.avgY}/>
+          <ShineContainer x={shinePosition.avgX} y={shinePosition.avgY} />
         </CardFace>
       </CardContent>
       <Hitbox className={hitboxClass} onMouseMove={handleMouseMove} onMouseLeave={resetTransform} />

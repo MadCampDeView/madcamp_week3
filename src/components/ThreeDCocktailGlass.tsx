@@ -8,10 +8,16 @@ import { useGLTF } from '@react-three/drei';
 import { Mesh, MeshStandardMaterial, DirectionalLight } from 'three';
 import { a, useSpring, config } from '@react-spring/three';
 
-const Glass: React.FC<{ isHovered: boolean; setIsHovered: (hovered: boolean) => void }> = ({ isHovered, setIsHovered }) => {
-  const { scene } = useGLTF('/glass2.glb');
+interface GlassProps {
+  modelPath: string;
+  isHovered: boolean;
+  setIsHovered: (hovered: boolean) => void;
+}
+
+const Glass: React.FC<GlassProps> = ({ modelPath, isHovered, setIsHovered }) => {
+  const { scene } = useGLTF(modelPath);
   const glassRef = useRef<THREE.Group>(null);
-  const [position, setPosition] = useState({ x: 0, y: -2, z: 0 });
+  const [position, setPosition] = useState({ x: 0, y: -2.25, z: 0 });
 
   // Traverse the scene and apply transparency to all materials
   scene.traverse((child) => {
@@ -37,7 +43,7 @@ const Glass: React.FC<{ isHovered: boolean; setIsHovered: (hovered: boolean) => 
       const newY = Math.sin(time * 2) * 0.1; // Up and down movement
       const newZ = Math.cos(time * 0.5) * 0.1; // Subtle Z-axis movement
 
-      setPosition({ x: newX, y: -2 + newY, z: newZ });
+      setPosition({ x: newX, y: -2.25 + newY, z: newZ });
 
       if (!isHovered) {
         glassRef.current.rotation.y += 0.025; // Rotate slowly around the Y-axis
@@ -77,7 +83,11 @@ const Glass: React.FC<{ isHovered: boolean; setIsHovered: (hovered: boolean) => 
   );
 };
 
-const ThreeDCocktailGlass: React.FC = () => {
+interface ThreeDCocktailGlassProps {
+  modelPath: string;
+}
+
+const ThreeDCocktailGlass: React.FC<ThreeDCocktailGlassProps> = ({ modelPath }) => {
   const lightRef = useRef<DirectionalLight>(null);
   const [isHovered, setIsHovered] = useState(false);
 
@@ -93,7 +103,7 @@ const ThreeDCocktailGlass: React.FC = () => {
         intensity={isHovered ? 3 : 2} // Change intensity on hover
       />
       <Suspense fallback={null}>
-        <Glass isHovered={isHovered} setIsHovered={setIsHovered} />
+        <Glass modelPath={modelPath} isHovered={isHovered} setIsHovered={setIsHovered} />
       </Suspense>
       {/* <OrbitControls /> */}
     </Canvas>

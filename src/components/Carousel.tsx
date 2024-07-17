@@ -1,4 +1,4 @@
-// components/Carousel.tsx
+// src/components/Carousel.tsx
 'use client';
 import styled from '@emotion/styled';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -70,6 +70,7 @@ const SwiperStyled = styled(Swiper)`
 const Carousel = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [spaceBetween, setSpaceBetween] = useState(100); // Default space between slides
+  const [cocktails, setCocktails] = useState<any[]>([]); // State to store recommended cocktails
 
   const handleSlideChange = (swiper) => {
     setActiveIndex(swiper.realIndex);
@@ -81,6 +82,32 @@ const Carousel = () => {
   };
 
   useEffect(() => {
+    const fetchCocktails = async () => {
+      try {
+        const response = await fetch('/data/cocktails.json');
+        const data = await response.json();
+
+        // Filter recommended cocktails
+        const recommendedCocktails = [];
+        for (const category of data) {
+          for (const cocktail of category.cocktails) {
+            if (cocktail.recommended) {
+              recommendedCocktails.push({
+                title: cocktail.name,
+                description: cocktail.description,
+                bgColor: cocktail.color,
+                textColor: cocktail.textColor
+              });
+            }
+          }
+        }
+        setCocktails(recommendedCocktails);
+      } catch (error) {
+        console.error('Error fetching cocktail data:', error);
+      }
+    };
+
+    fetchCocktails();
     updateSpaceBetween();
     window.addEventListener('resize', updateSpaceBetween);
     return () => {
@@ -88,35 +115,9 @@ const Carousel = () => {
     };
   }, []);
 
-  const titles = [
-    '여름 특선 칵테일',
-    '클래식 칵테일',
-    '과일 칵테일',
-    '무알콜 칵테일',
-    '가을 특선 칵테일',
-    '겨울 특선 칵테일',
-    '이국적인 칵테일'
-  ];
-
-  const descriptions = [
-    '시원한 맛',
-    '시간을 초월한 맛',
-    '상큼한 과일향',
-    '가볍게 즐기는',
-    '따뜻한 느낌',
-    '따뜻한 음료',
-    '이국적인 맛'
-  ];
-
-  const colors = [
-    '#FFB6C1', // Light Pink
-    '#FA8072', // Salmon
-    '#FFD700', // Gold
-    '#ADFF2F', // Green Yellow
-    '#FF4500', // Orange Red
-    '#1E90FF', // Dodger Blue
-    '#9370DB'  // Medium Purple
-  ];
+  if (cocktails.length === 0) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <CarouselContainer>
@@ -131,9 +132,9 @@ const Carousel = () => {
         onSlideChange={handleSlideChange}
         loop={true} /* Enable infinite loop */
       >
-        {titles.map((title, index) => {
+        {cocktails.map((cocktail, index) => {
           // Determine position based on the activeIndex and current index
-          const positionIndex = (index - activeIndex + titles.length) % titles.length;
+          const positionIndex = (index - activeIndex + cocktails.length) % cocktails.length;
           let position: 'left' | 'right' | 'center';
           if (positionIndex === 0) {
             position = 'center';
@@ -148,10 +149,11 @@ const Carousel = () => {
               <InteractiveCard
                 className=""
                 hitboxClass=""
-                title={title}
-                description={descriptions[index]}
+                title={cocktail.title}
+                description={cocktail.description}
                 position={position}
-                color={colors[index]} // Pass the color prop
+                bgColor={cocktail.bgColor} // Pass the color prop
+                textColor={cocktail.textColor}
               />
             </SwiperSlideStyled>
           );
